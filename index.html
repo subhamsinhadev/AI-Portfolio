@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subham Kumar Sinha - Portfolio</title>
+  <style>
+    footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f7fa;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-theme {
+      background: #1a1a1a;
+      color: #333; /* Dark text for visibility */
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+
+    body.dark-theme nav {
+      background: #2c2c2c;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #007bff;
+    }
+
+    body.dark-theme .logo {
+      color: #4da8ff;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    body.dark-theme .nav-links a {
+      color: #ddd;
+    }
+
+    .nav-links a:hover {
+      color: #007bff;
+    }
+
+    body.dark-theme .nav-links a:hover {
+      color: #4da8ff;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    body.dark-theme .hamburger {
+      color: #ddd;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+      margin-left: 20px;
+    }
+
+    body.dark-theme .theme-toggle {
+      color: #ddd;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #007bff, #b35203);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    body.dark-theme .hero {
+      background: linear-gradient(135deg, #004080, #d80e73);
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    .hero-content img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: #000000;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    body.dark-theme .cta-button {
+      background: #4da8ff;
+    }
+
+    .cta-button:hover {
+      background: #0056b3;
+    }
+
+    body.dark-theme .cta-button:hover {
+      background: #3a8cff;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #007bff;
+    }
+
+    body.dark-theme h2 {
+      color: #4da8ff;
+    }
+
+    /* About Section */
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .about-content img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #007bff;
+    }
+
+    body.dark-theme .about-content img {
+      border-color: #4da8ff;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .about-text ul {
+      list-style: none;
+      font-size: 1.1rem;
+    }
+
+    .about-text ul li {
+      margin-bottom: 10px;
+    }
+
+    /* Experience Section */
+    .experience-item {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, scale 0.3s ease;
+    }
+
+    body.dark-theme .experience-item {
+      background: #2c2c2c;
+    }
+
+    .experience-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .experience-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid #007bff;
+    }
+
+    body.dark-theme .experience-item:hover {
+      border-color: #4da8ff;
+    }
+
+    .experience-item h3 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    body.dark-theme .experience-item h3 {
+      color: #ddd;
+    }
+
+    .experience-item p {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    body.dark-theme .experience-item p {
+      color: #aaa;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .skill-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    body.dark-theme .skill-card {
+      background: #2c2c2c;
+    }
+
+    .skill-card.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .skill-card:hover {
+      transform: rotate(2deg) translateY(-5px);
+      background-color: #f0f8ff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark-theme .skill-card:hover {
+      background-color: #3a3a3a;
+    }
+
+    .skill-card i {
+      font-size: 2rem;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    body.dark-theme .skill-card i {
+      color: #4da8ff;
+    }
+
+    .skill-card p {
+      color: #333;
+    }
+
+    body.dark-theme .skill-card p {
+      color: #ddd;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+    }
+
+    body.dark-theme .project-card {
+      background: #2c2c2c;
+    }
+
+    .project-card.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      background: rgba(0, 123, 255, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    body.dark-theme .project-card::after {
+      background: rgba(77, 168, 255, 0.3);
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    .project-info {
+      padding: 20px;
+      position: relative;
+    }
+
+    .project-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    body.dark-theme .project-info h3 {
+      color: #ddd;
+    }
+
+    .project-info p {
+      font-size: 1rem;
+      color: #666;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+
+    body.dark-theme .project-info p {
+      color: #aaa;
+    }
+
+    .project-card:hover .project-info p {
+      opacity: 0.8;
+    }
+
+    /* Contact Section */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-theme .contact-form {
+      background: #2c2c2c;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      background: #fff;
+      color: #333;
+    }
+
+    body.dark-theme .contact-form input,
+    body.dark-theme .contact-form textarea {
+      border-color: #555;
+      background: #333;
+      color: #ddd;
+    }
+
+    .contact-form button {
+      background: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    body.dark-theme .contact-form button {
+      background: #4da8ff;
+    }
+
+    .contact-form button:hover {
+      background: #0056b3;
+    }
+
+    body.dark-theme .contact-form button:hover {
+      background: #3a8cff;
+    }
+
+    .contact-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .contact-links a {
+      color: #007bff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    body.dark-theme .contact-links a {
+      color: #4da8ff;
+    }
+
+    .contact-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Chat Bubble */
+    .chat-bubble {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #007bff;
+      color: #fff;
+      padding: 15px 25px;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    body.dark-theme .chat-bubble {
+      background: #4da8ff;
+    }
+
+    .chat-bubble i {
+      font-size: 1.2rem;
+    }
+
+    .chat-bubble:hover {
+      background: #0056b3;
+    }
+
+    body.dark-theme .chat-bubble:hover {
+      background: #3a8cff;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Chatbot Overlay */
+    .chatbot-overlay {
+      position: fixed;
+      bottom: -100%;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      transition: bottom 0.3s ease;
+      overflow: hidden;
+    }
+
+    body.dark-theme .chatbot-overlay {
+      background: #2c2c2c;
+    }
+
+    .chatbot-overlay.active {
+      bottom: 80px;
+    }
+
+    .chatbot-header {
+      background: #007bff;
+      color: #fff;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    body.dark-theme .chatbot-header {
+      background: #4da8ff;
+    }
+
+    .chatbot-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    .chatbot-header h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-left: 10px;
+      flex-grow: 1;
+    }
+
+    .chatbot-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .chatbot-body {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+
+    body.dark-theme .chatbot-body {
+      background: #333;
+    }
+
+    .chat-message {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .chat-message.user {
+      justify-content: flex-end;
+    }
+
+    .chat-message.ai .message-content {
+      background: #e6f3ff;
+      color: #333;
+    }
+
+    body.dark-theme .chat-message.ai .message-content {
+      background: #4a4a4a;
+      color: #ddd;
+    }
+
+    .chat-message.user .message-content {
+      background: #007bff;
+      color: #fff;
+    }
+
+    body.dark-theme .chat-message.user .message-content {
+      background: #4da8ff;
+    }
+
+    .message-content {
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .typing-animation {
+      display: flex;
+      gap: 5px;
+      padding: 10px;
+    }
+
+    .typing-animation span {
+      width: 8px;
+      height: 8px;
+      background: #007bff;
+      border-radius: 50%;
+      animation: typing 1s infinite;
+    }
+
+    body.dark-theme .typing-animation span {
+      background: #4da8ff;
+    }
+
+    .typing-animation span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-animation span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .chatbot-input {
+      display: flex;
+      padding: 15px;
+      border-top: 1px solid #ddd;
+      background: #fff;
+    }
+
+    body.dark-theme .chatbot-input {
+      border-top-color: #555;
+      background: #2c2c2c;
+    }
+
+    .chatbot-input input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      outline: none;
+      background: #fff;
+      color: #333;
+    }
+
+    body.dark-theme .chatbot-input input {
+      border-color: #555;
+      background: #333;
+      color: #ddd;
+    }
+
+    .chatbot-input button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    body.dark-theme .chatbot-input button {
+      background: #4da8ff;
+    }
+
+    .chatbot-input button:hover {
+      background: #0056b3;
+    }
+
+    body.dark-theme .chatbot-input button:hover {
+      background: #3a8cff;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    body.dark-theme footer {
+      background: #1a1a1a;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      body.dark-theme .nav-links {
+        background: #2c2c2c;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        margin: 10px 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .chat-bubble {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      .chatbot-overlay {
+        width: 90%;
+        right: 5%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .project-card img {
+        height: 150px;
+      }
+
+      .chatbot-overlay {
+        height: 400px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">Subham Kumar Sinha</div>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <img src="/images/profile.jpg" alt="Subham Kumar Sinha">
+      <h1>Subham Kumar Sinha</h1>
+      <p>Java Developer | Python Developer | Android Developer </p>
+      <p>Hi, I'm Subham Sinha, an aspiring Software Engineer and a passionate, forward-thinking B.Tech student specializing in Computer Science and Engineering, with a focus on Artificial Intelligence and Machine Learning.</p>
+      <a href="#projects" class="cta-button">Explore My Work</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about-content">
+      
+      <div class="about-text">
+      <p>Hi, I'm Subham Sinha — an aspiring Software Engineer and a passionate, forward-thinking B.Tech student majoring in Computer Science and Engineering with a specialization in Artificial Intelligence and Machine Learning.</p> 
+
+<p>I have a solid technical foundation in programming languages such as Python, Java, and C, along with practical experience in data structures, software development, and full-stack Android development. My core interests include Android app development, system exploitation, and cybersecurity, all of which fuel my curiosity and drive to continuously explore emerging areas in technology </p> 
+ 
+      </div>
+    </div>
+  </section>
+   <section id="about">
+    <h2>Education</h2>
+     <ul>
+          <h3>B.Tech in CSE(AI&ML), Asansol Engineering College (2023–Present)</h3>
+          <h3>Class XII, SKS Public School, Raniganj (74%, 2022)</h3>
+          <h3>Class X, SKS Public School, Raniganj (88%)</h3>
+        </ul>
+   </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="experience-item">
+      <h3>Reverse Engineering And Development Community  (Jun 2021-Present)</h3>
+      <p>I started a community on Android development and Reverse Engineering Currently It Has 50k+ Members✨</p>
+    </div>
+    <div class="experience-item">
+      <h3>Open Source Contributor (Oct–Nov 2024)</h3>
+      <p>GirlScript Summer of Code</p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <i class="fab fa-html5"></i>
+        <p>HTML</p>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-css3-alt"></i>
+        <p>CSS</p>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-js"></i>
+        <p>JavaScript</p>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-python"></i>
+        <p>Python</p>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-java"></i>
+        <p>Java</p>
+      </div>
+     
+      <!-- <div class="skill-card">
+        <i class="fab fa-postman"></i>
+        <p>Postman</p>
+      </div> -->
+   
+      <div class="skill-card">
+        <i class="fab fa-git"></i>
+        <p>Git</p>
+      </div>
+    
+      <div class="skill-card">
+        <i class="fab fa-figma"></i>
+        <p>Figma</p>
+      </div>
+      
+      <!-- <div class="skill-card">
+        <i class="fab fa-mysql"></i>
+        <p>My Sql</p>
+      </div>
+      
+      <div class="skill-card">
+        <i class="fab fa-xml"></i>
+        <p>Xml</p>
+      </div>
+       -->
+      <div class="skill-card">
+        <i class="fab fa-android"></i>
+        <p>Android</p>
+      </div>
+       <div class="skill-card">
+        <i class="fas fa-palette"></i>
+        <p>Canva</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="/images/ai.avif" alt="AI-Powered Telegram Chatbot">
+        <div class="project-info">
+          <h3>AI-Powered Telegram Chatbot</h3>
+          <p>• Tech Stack: Python, Gemini API, python-telegram-bot, REST APIs </p>
+          <p>I developed a Telegram chatbot that integrates Google's Gemini API to deliver intelligent, real-time conversational responses. Using the python-telegram-bot library, I ensured smooth handling of user interactions. The project involved implementing asynchronous programming and robust exception handling, showcasing my practical skills in API integration, chatbot development, and conversational AI.</p>
+        </div>
+      </div>
+       <div class="project-card">
+        <img src="/images/pass.png" alt="Random Password Generator Extension">
+        <div class="project-info">
+          <h3>Random Password Generator Extension</h3>
+          <p>• Tech Stack: Html, Css, JavaScript </p>
+          <p>Random Password Generator Chrome Extension to make creating strong passwords quick and easy. With a simple and modern UI, it’s a handy tool for enhancing password security.
+This project was a great way to deepen my skills in JavaScript, HTML, CSS, and Chrome Extension development, especially while working within Content Security Policy (CSP) guidelines.
+</p>
+        </div>
+      </div>
+        <div class="project-card">
+        <img src="/images/women.avif" alt="Women Safety Site">
+        <div class="project-info">
+          <h3>Women Safety Site</h3>
+          <p>• Tech Stack: Android Development · Application Development · HTML · JavaScript · Management · Teamwork </p>
+          <p>Women Safety Site containing several key features like face recognition, location mapping, security alerts and 
+daily check-in.</p>
+        </div>
+      </div>
+    </div>
+    
+  
+    
+
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:subhamsinha9206@gmail.com">subhamsinha9206@gmail.com</a>
+      <a href="https://linkedin.com/i" target="_blank">LinkedIn</a>
+      <a href="#resume" onclick="alert('Resume download not implemented yet. Please contact via email.');">Download Resume</a>
+    </div>
+  </section>
+
+<footer style="background-color: #f0f0f0; padding: 20px 30px; text-align: center; font-family: Arial, sans-serif; color: #333; margin-top: 40px;">
+    <p style="margin: 10px 0;">Connect with me:</p>
+
+    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; font-size: 18px;">
+       
+      <a href="https://github.com/subhamsinhadev" target="_blank" style="text-decoration: none; color: #333;">
+            <i class="fab fa-github"></i> 
+        </a>
+       
+        <a href="https://www.linkedin.com/in/subhamsinhadev" target="_blank" style="text-decoration: none; color: #0077b5;">
+            <i class="fab fa-linkedin"></i> 
+        </a>
+        <a href="mailto:subhamsinha9206@gmail.com" style="text-decoration: none; color: #333;">
+            <i class="fas fa-envelope"></i> 
+        </a>
+        
+    </div>
+ 
+    <p style="margin-top: 15px; font-size: 13px; color: #777;">&copy; 2025 Subham Kumar Sinha. All rights reserved.</p>
+</footer>
+  <!-- Chat Bubble -->
+  <div class="chat-bubble">
+    <i class="fas fa-comment-alt"></i>
+    <span>Ask anything about me</span>
+  </div>
+
+  <!-- Chatbot Overlay -->
+  <div class="chatbot-overlay">
+    <div class="chatbot-header">
+      <img src="/images/profile.jpg" alt="Subham Kumar Sinha">
+      <h3>Chat with Me</h3>
+      <button class="chatbot-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chatbot-body">
+      <div class="chat-message ai">
+        <div class="message-content">Hi, I'm Subham Kumar Sinha How can I help you.</div>
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" placeholder="Type your message...">
+      <button><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  
+  <script>
+    // Constants and Variables
+    const myFullName = "Subham Kumar Sinha";
+    const myDescription = "I'm a UI/UX designer passionate about clean design, immersive storytelling, and creating impactful digital products. I specialize in Figma, HTML, CSS, JavaScript, and tools like Illustrator, Canva, and Firebase. Currently pursuing a B.Tech in CSE at Amity University Kolkata, I blend creativity and technical skills to deliver user-centered solutions.";
+
+    // Hamburger Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Smooth Scroll for Nav Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      themeToggle.innerHTML = document.body.classList.contains('dark-theme')
+        ? '<i class="fas fa-sun"></i>'
+        : '<i class="fas fa-moon"></i>';
+    });
+
+    // Card Animations
+    const experienceItems = document.querySelectorAll('.experience-item');
+    const skillCards = document.querySelectorAll('.skill-card');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    experienceItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.2}s`;
+      cardObserver.observe(item);
+    });
+
+    skillCards.forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.1}s`;
+      cardObserver.observe(card);
+    });
+
+    projectCards.forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.3}s`;
+      cardObserver.observe(card);
+    });
+
+    // Chatbot Toggle and Functionality
+    const chatBubble = document.querySelector('.chat-bubble');
+    const chatbotOverlay = document.querySelector('.chatbot-overlay');
+    const chatbotClose = document.querySelector('.chatbot-close');
+    const chatInput = document.querySelector('.chatbot-input input');
+    const sendButton = document.querySelector('.chatbot-input button');
+    const chatBody = document.querySelector('.chatbot-body');
+
+    chatBubble.addEventListener('click', () => {
+      chatbotOverlay.classList.toggle('active');
+      chatBubble.style.display = chatbotOverlay.classList.contains('active') ? 'none' : 'flex';
+      if (chatbotOverlay.classList.contains('active')) {
+        // Reset chat with initial message
+        chatBody.innerHTML = `
+          <div class="chat-message ai">
+            <div class="message-content">Hi, I'm ${myFullName}, How can i help you!</div>
+          </div>
+        `;
+      }
+    });
+
+    chatbotClose.addEventListener('click', () => {
+      chatbotOverlay.classList.remove('active');
+      chatBubble.style.display = 'flex';
+    });
+
+    sendButton.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    async function sendMessage() {
+      const messageText = chatInput.value.trim();
+      if (messageText) {
+        // Add user message
+        const userMessage = document.createElement('div');
+        userMessage.classList.add('chat-message', 'user');
+        userMessage.innerHTML = `<div class="message-content">${messageText}</div>`;
+        chatBody.appendChild(userMessage);
+
+        // Add typing animation
+        const typing = document.createElement('div');
+        typing.classList.add('typing-animation');
+        typing.innerHTML = `<span></span><span></span><span></span>`;
+        chatBody.appendChild(typing);
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Simulate Gemini API call
+        try {
+          const response = await simulateGeminiApi(messageText);
+          setTimeout(() => {
+            // Remove typing animation
+            typing.remove();
+
+            // Add AI response
+            const aiMessage = document.createElement('div');
+            aiMessage.classList.add('chat-message', 'ai');
+            aiMessage.innerHTML = `<div class="message-content">${response}</div>`;
+            chatBody.appendChild(aiMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+          }, 1000); // Delay to show typing animation
+        } catch (error) {
+          setTimeout(() => {
+            typing.remove();
+            const aiMessage = document.createElement('div');
+            aiMessage.classList.add('chat-message', 'ai');
+            aiMessage.innerHTML = `<div class="message-content">Oops, something went wrong. Try again!</div>`;
+            chatBody.appendChild(aiMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+          }, 1000);
+        }
+
+        // Clear input
+        chatInput.value = '';
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    }
+
+    // Simulated Gemini API call (replace with actual API call)
+    async function simulateGeminiApi(message) {
+      // Placeholder for actual API call
+      /*
+      const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=GEMINI_API_KEY', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ text: `User_message: ${message}. Reply naturally to the usermessage and if required then answer based on: ${myDescription} or just simply give friendly reply. and reply in a way that Subham Kumar Sinha is herself talking. reply in short sentences` }]
+          }]
+        })
+      });
+      const data = await response.json();
+      return data.contents[0].parts[0].text; // Adjust based on actual API response structure
+      */
+      // Simulated response
+      return `Hey! Thanks for asking about "${message}". I love designing intuitive UI/UX. Want to know more about Agrimitra or my design process?`;
+    }
+  </script>
+</body>
+</html>
